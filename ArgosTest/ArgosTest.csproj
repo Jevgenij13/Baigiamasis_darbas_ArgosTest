@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="GeneralMethods.cs" />
     <Compile Include="Iphonetst.cs" />
     <Compile Include="Pricecheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

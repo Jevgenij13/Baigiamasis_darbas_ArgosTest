@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using NUnit.Framework.Interfaces;
+using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace ArgosTest
 {
@@ -17,7 +21,9 @@ namespace ArgosTest
         [SetUp]
         public void SETUP()
         {
+            var monitor = Screen.FromPoint(new Point(Screen.PrimaryScreen.Bounds.Right + 800, Screen.PrimaryScreen.Bounds.Top));
             driver = new ChromeDriver();
+            driver.Manage().Window.Position = new Point(monitor.Bounds.X, monitor.Bounds.Y);
             driver.Manage().Window.Maximize();
             driver.Url = ("https://www.argos.co.uk/browse/technology/mobile-phones-and-accessories/sim-free-phones/c:30147/brands:apple?tag=ar:shop:apple-iphone:shop-all-footer");
             By cookieBtn = By.XPath("//*[@id='consent_prompt_submit']");
@@ -28,7 +34,33 @@ namespace ArgosTest
         [TearDown]
         public void TearDown()
         {
-            //driver.Quit();
+            var countToLEave = 4;
+            var filai = Directory.GetFiles("Screenshots").ToList();
+            filai.Sort();
+            if (filai.Count > countToLEave)
+            {
+                for (int i = 0; i < filai.Count - countToLEave; i++)
+                {
+                    File.Delete(filai[i]);
+                }
+            }
+            
+
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                var name =
+                    $"{TestContext.CurrentContext.Test.MethodName}" +
+                    $" Error at " +
+                    $"{DateTime.Now.ToString().Replace(":", "_")}";
+
+                GeneralMethods.CaptureScreenShot(driver, name);
+
+                File.WriteAllText(
+                    $"Screenshots\\{name}.txt",
+                    TestContext.CurrentContext.Result.Message);
+            }
+            driver.Close();
+            driver.Quit();
         }
 
         //[Test]
@@ -53,7 +85,7 @@ namespace ArgosTest
             List<double> prices = new List<double>();
             foreach (IWebElement el in driver.FindElements(pricesBy))
             {
-                string onePrice = el.Text.Substring(0, el.Text.Length - 2);
+                string onePrice = el.Text.Substring(1, el.Text.Length - 2).Replace(".", ",");
                 double onePriceDouble = double.Parse(onePrice);
                 prices.Add(onePriceDouble);
             }
@@ -79,7 +111,7 @@ namespace ArgosTest
             prices = new List<double>();
             foreach (IWebElement el in driver.FindElements(pricesBy))
             {
-                string onePrice = el.Text.Substring(0, el.Text.Length - 2);
+                string onePrice = el.Text.Substring(1, el.Text.Length - 2).Replace(".", ",");
                 double onePriceDouble = double.Parse(onePrice);
                 prices.Add(onePriceDouble);
             }
@@ -92,7 +124,7 @@ namespace ArgosTest
                 }
             }
 
-        
+            Assert.IsTrue(false);
 
         
         
