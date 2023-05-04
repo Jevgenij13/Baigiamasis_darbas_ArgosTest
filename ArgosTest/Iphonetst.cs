@@ -36,6 +36,18 @@ namespace ArgosTest
         [TearDown]
         public void TearDown()
         {
+            //trinti screenshot failus folderije
+            var countToLEave = 10;
+            var filai = Directory.GetFiles("Screenshots").ToList();
+            filai.Sort();
+            if (filai.Count > countToLEave)
+            {
+                for (int i = 0; i < filai.Count - countToLEave; i++)
+                {
+                    File.Delete(filai[i]);
+                }
+
+            } 
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 var name =

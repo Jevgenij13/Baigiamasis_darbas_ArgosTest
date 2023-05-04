@@ -34,7 +34,8 @@ namespace ArgosTest
         [TearDown]
         public void TearDown()
         {
-            var countToLEave = 4;
+            //trinti screenshot failus folderije
+            var countToLEave = 10;
             var filai = Directory.GetFiles("Screenshots").ToList();
             filai.Sort();
             if (filai.Count > countToLEave)
@@ -45,7 +46,7 @@ namespace ArgosTest
                 }
             }
             
-
+            //padaryti screenshotus 
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 var name =
@@ -80,7 +81,7 @@ namespace ArgosTest
 
 
 
-
+            //kainu rikiavimas nuo maziausios iki auksciausios
             By pricesBy = By.XPath("//*[@id='findability']/div[7]/div[1]/div[5]/div[5]/div[1]/div/div[1]/div/div[1]/div[3]/div[4]/div/div");
             List<double> prices = new List<double>();
             foreach (IWebElement el in driver.FindElements(pricesBy))
@@ -124,7 +125,7 @@ namespace ArgosTest
                 }
             }
 
-            Assert.IsTrue(false);
+            
 
         
         
