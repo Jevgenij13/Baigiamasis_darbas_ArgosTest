@@ -103,24 +103,28 @@ namespace ArgosTest
 
             By LegoCity = By.XPath("//label[@id='filter-character-lego city-label']//div[@class='Checkboxstyles__CheckboxOption-b61uwr-3 cKQGxN']//*[name()='svg']");
             By LegoMarwel = By.XPath("//label[@id='filter-character-lego marvel-label']//div[@class='Checkboxstyles__CheckboxOption-b61uwr-3 cKQGxN']//*[name()='svg']");
-            //By AllCheckBoxes = By.XPath("//input[@type='checbox']");
+            //By AllCheckBoxes = By.XPath("");
 
             wait.Until(d => d.FindElement(LegoCity)).Click();
             wait.Until(d => d.FindElement(LegoMarwel)).Click();
-            ReadOnlyCollection<IWebElement>webElements =driver.FindElements(By.XPath("//input[@type='checbox']"));
+            Thread.Sleep(800);
+            ReadOnlyCollection<IWebElement> webElements = driver.FindElements(By.XPath("//*[@id='character-facet-accordion-content']//input[@type='checkbox']"));
             int checkedCount = 0;
             int uncheckedCount = 0;
 
-            foreach (IWebElement element in webElements)
+            foreach (var element in webElements)
             {
-                if(element.Selected==true) 
+                if (element.Selected == true) 
                     checkedCount++; 
                 else
                     uncheckedCount++;
                 
             }
-            Console.WriteLine("Number of checked checboxes are" +checkedCount);
-            Console.WriteLine("Number of unchecked checkboxes are" +uncheckedCount);
+            
+
+            Console.WriteLine("Number of checkboxes" + " " + webElements.Count());
+            Console.WriteLine("Number of checked checboxes are" + " " + checkedCount);
+            Console.WriteLine("Number of unchecked checkboxes are" + " " +  uncheckedCount);
         }
 
     }

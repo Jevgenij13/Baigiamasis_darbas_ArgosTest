@@ -101,7 +101,7 @@ namespace ArgosTest
             //Thread.Sleep(800);
 
 
-            //                              //*[@id="findability"]/div[7]/div[1]/div[5]/div[5]/div[1]/div/div[1]/div/div[1]/div[1]/a/div[2]/picture/img
+                                          
             By ChooseOptionsBtn = By.XPath("//*[@id='findability']/div[7]/div[1]/div[5]/div[5]/div[1]/div/div[1]/div/div[1]/div[2]/a/div[2]/picture/img");
             By AddToCartBtn = By.XPath("//button[@data-test='add-to-trolley-button-button']");
             By GoToTrolleyBtn = By.XPath("//*[@id='content']/main/div[2]/div[2]/div[1]/section[2]/section/div[14]/div/div/div[1]/footer/div/div[2]/a");

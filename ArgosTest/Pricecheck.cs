@@ -101,6 +101,7 @@ namespace ArgosTest
 
 
             }
+            //dar karta patikrina ar kainu rusiavimas liko toks pat
             ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, 300);");
             Thread.Sleep(800);
             By FirstPhone = By.XPath("//img[contains(@alt,'- Black')]");
