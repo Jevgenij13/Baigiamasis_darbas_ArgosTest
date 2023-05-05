@@ -62,10 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeneralMethods.cs" />
-    <Compile Include="Iphonetst.cs" />
-    <Compile Include="Pricecheck.cs" />
+    <Compile Include="Test_files\Iphonetst.cs" />
+    <Compile Include="Test_files\Pricecheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToysTst.cs" />
+    <Compile Include="Test_files\ToysTst.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

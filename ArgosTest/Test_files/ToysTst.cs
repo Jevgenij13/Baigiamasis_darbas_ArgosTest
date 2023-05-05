@@ -70,16 +70,12 @@ namespace ArgosTest
         public void FindToys()
         {
             //patikrinti meniu kur issivinioja uzvaziuojant ant meniu pele, pasirinkti toys elementa ir patikrinti ar esam tam puslapi, Is toys pasirinkti lego ir patikrinti ar nuejome i ta puslapi
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.PollingInterval = TimeSpan.FromMilliseconds(500);
-            wait.IgnoreExceptionTypes(typeof(NotSupportedException));
-            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            WebDriverWait wait = GeneralMethods.GetWait(driver);
 
             By DropDownMenu = By.XPath("//a[@aria-label='To hear more Toys links, please hit the spacebar key to enter the menu. Or click here to go to all of Toys.']");
             By Legotoys = By.XPath("//a[@class='styles__CategoryLink-sc-8hzx8v-1 jtgtYs'][normalize-space()='LEGO']");
-            IWebElement element = driver.FindElement(By.XPath("//span[@class='_13iYl'][normalize-space()='Shop']"));
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(element).Perform();
+
+            GeneralMethods.HoverOn(driver, "//span[@class='_13iYl'][normalize-space()='Shop']");
             driver.FindElement(DropDownMenu).Click();
 
             Assert.AreEqual("Toys", driver.FindElement(By.XPath("//h1[@class='styles__CategoryName-sc-6xv5se-4 jxgscl']")).
@@ -94,19 +90,16 @@ namespace ArgosTest
         public void CheckLegoCheckBoxes()
         {
             //Lego puslapi pasirinkti 2 checkboxus ir patikrinti ar pasirinkome 2 checkboxus is visu esamu 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.PollingInterval = TimeSpan.FromMilliseconds(500);
-            wait.IgnoreExceptionTypes(typeof(NotSupportedException));
-            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            WebDriverWait wait = GeneralMethods.GetWait(driver);
 
             driver.Url = ("https://www.argos.co.uk/browse/toys/lego/c:30379/");
 
             By LegoCity = By.XPath("//label[@id='filter-character-lego city-label']//div[@class='Checkboxstyles__CheckboxOption-b61uwr-3 cKQGxN']//*[name()='svg']");
             By LegoMarwel = By.XPath("//label[@id='filter-character-lego marvel-label']//div[@class='Checkboxstyles__CheckboxOption-b61uwr-3 cKQGxN']//*[name()='svg']");
-            //By AllCheckBoxes = By.XPath("");
 
             wait.Until(d => d.FindElement(LegoCity)).Click();
             wait.Until(d => d.FindElement(LegoMarwel)).Click();
+            //threadSleep reikalingas del letesnio interneto, nespeja pazymeti checkbox'o
             Thread.Sleep(800);
             ReadOnlyCollection<IWebElement> webElements = driver.FindElements(By.XPath("//*[@id='character-facet-accordion-content']//input[@type='checkbox']"));
             int checkedCount = 0;
@@ -120,11 +113,13 @@ namespace ArgosTest
                     uncheckedCount++;
                 
             }
-            
+            Assert.AreEqual(5, webElements.Count);
+            Assert.AreEqual(2, checkedCount);
+            Assert.AreEqual(3, uncheckedCount);
 
-            Console.WriteLine("Number of checkboxes" + " " + webElements.Count());
-            Console.WriteLine("Number of checked checboxes are" + " " + checkedCount);
-            Console.WriteLine("Number of unchecked checkboxes are" + " " +  uncheckedCount);
+
+
+           
         }
 
     }

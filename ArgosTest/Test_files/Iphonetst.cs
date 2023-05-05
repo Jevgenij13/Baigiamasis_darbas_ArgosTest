@@ -92,16 +92,10 @@ namespace ArgosTest
         public void AddToCart()
 
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.PollingInterval = TimeSpan.FromMilliseconds(500);
-            wait.IgnoreExceptionTypes(typeof(NotSupportedException));
-            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            WebDriverWait wait = GeneralMethods.GetWait(driver);
+
             driver.Url = ("https://www.argos.co.uk/browse/technology/mobile-phones-and-accessories/sim-free-phones/c:30147/brands:apple?tag=ar:shop:apple-iphone:shop-all-footer");
-
-            //Thread.Sleep(800);
-
-
-                                          
+                             
             By ChooseOptionsBtn = By.XPath("//*[@id='findability']/div[7]/div[1]/div[5]/div[5]/div[1]/div/div[1]/div/div[1]/div[2]/a/div[2]/picture/img");
             By AddToCartBtn = By.XPath("//button[@data-test='add-to-trolley-button-button']");
             By GoToTrolleyBtn = By.XPath("//*[@id='content']/main/div[2]/div[2]/div[1]/section[2]/section/div[14]/div/div/div[1]/footer/div/div[2]/a");
