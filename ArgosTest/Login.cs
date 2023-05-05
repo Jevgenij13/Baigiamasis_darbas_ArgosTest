@@ -89,13 +89,15 @@ namespace ArgosTest
             driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
             IWebElement signInButton = driver.FindElement(By.XPath("//button[normalize-space()='Sign in securely']"));
             signInButton.Click();
-            Thread.Sleep(6000);
-            //WebDriverWait wait = GeneralMethods.GetWait(driver);
-            //Assert.AreEqual("Hi, Jevgenij Volynec", driver.FindElement(By.XPath("//span[normalize-space()='Hi,']")).
-            //Text, "The expected text not present");
+            //Thread.Sleep(6000);
+            
+            Assert.AreEqual("Hi, Jevgenij Volynec", driver.FindElement(By.XPath("//span[normalize-space()='Hi,']")).
+            Text, "The expected text not present");
 
             wait.Until(d => d.FindElement(SignOutBTn)).Click();
 
+            Assert.AreNotEqual("Hi, Jevgenij Volynec", driver.FindElement(By.XPath("//div[@class='m-jtR']")).
+            Text, "The expected text not present");
 
         }
           
