@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeneralMethods.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="Test_files\Iphonetst.cs" />
     <Compile Include="Test_files\Pricecheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
