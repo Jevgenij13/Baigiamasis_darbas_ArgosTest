@@ -14,7 +14,7 @@ namespace ArgosTest
         // Locators
         private readonly By emailInput = By.Id("email-address");
         private readonly By passwordInput = By.XPath("//input[@id='current-password']");
-        private readonly By loginButton = By.XPath("//button[normalize-space()='Sign in securely']");
+        private readonly By signInButton = By.XPath("//button[normalize-space()='Sign in securely']");
         public LoginPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -32,7 +32,7 @@ namespace ArgosTest
 
         public void ClickLoginButton()
         {
-            driver.FindElement(loginButton).Click();
+            driver.FindElement(signInButton).Click();
         }
 
 
