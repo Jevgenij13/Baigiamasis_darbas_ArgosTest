@@ -80,7 +80,7 @@ namespace ArgosTest
             signInLink.Click();
 
             driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
-
+            var loginPage = new LoginPage(driver);
             IWebElement emailInput = driver.FindElement(By.Id("email-address"));
             emailInput.SendKeys("testlpbpdc@gmail.com");
             IWebElement passwordInput = driver.FindElement(By.XPath("//input[@id='current-password']"));
@@ -89,7 +89,7 @@ namespace ArgosTest
             driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
             IWebElement signInButton = driver.FindElement(By.XPath("//button[normalize-space()='Sign in securely']"));
             signInButton.Click();
-            //Thread.Sleep(6000);
+            //Thread.Sleep(600);
             
             Assert.AreEqual("Hi, Jevgenij Volynec", driver.FindElement(By.XPath("//span[normalize-space()='Hi,']")).
             Text, "The expected text not present");
